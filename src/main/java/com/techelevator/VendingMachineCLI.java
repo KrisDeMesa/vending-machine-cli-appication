@@ -12,9 +12,52 @@ public class VendingMachineCLI {
 	}
 
 	public void run() {
+		VendingItems test = new VendingItems(userInput);
+		test.convertItems();
+		// Add a loop here for your menu
+		boolean loopCheck = true;
+		while (loopCheck) {
+			System.out.println("(1) Display Vending Machine Items");
+			System.out.println("(2) Purchase");
+			System.out.println("(3) Exit");
+			String choice = userInput.nextLine();
+			int input = Integer.parseInt(choice);
+			VendingMachine vend = new VendingMachine(userInput);
+			// if input is 1
+			if (input == 1) {
+				// call vending machine method Display items when input is 1
+			} else if (input == 2) {
+				// vending machine sub menu
+				loopCheck = false;
+				boolean purchaseLoop = true;
+				while (purchaseLoop) {
+					System.out.println("Current Money Provided: $" + vend.getCreditBalance());
+					System.out.println("(1) Feed Money");
+					System.out.println("(2) Select Product");
+					System.out.println("(3) Finish Transaction");
+					String purchaseMenu = userInput.nextLine();
+					int purchaseInput = Integer.parseInt(choice);
+					if (purchaseInput == 1) {
+						vend.loadCredits(2.0);
+					} else if (purchaseInput == 2) {
+						// goes into sub menu product
+					} else if (purchaseInput == 3) {
+						// finish transaction
+						purchaseLoop = false;
+					} else {
+						System.out.println("Invalid input!");
+					}
+				}
+			} else if (input == 3) {
+				// menu cli exits
+				System.out.println("Exit");
+				loopCheck = false;
+			} else {
+				// Invalid input
+				System.out.println("Invalid input");
+			}
 
-			// Add a loop here for your menu
-
+		}
 	}
 
 	public static void main(String[] args) {
