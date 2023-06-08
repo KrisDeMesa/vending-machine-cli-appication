@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class VendingMachineCLI {
@@ -26,6 +27,7 @@ public class VendingMachineCLI {
 			// if input is 1
 			if (input == 1) {
 				// call vending machine method Display items when input is 1
+				System.out.println(vend.displayItems());
 			} else if (input == 2) {
 				// vending machine sub menu
 				loopCheck = false;
@@ -63,5 +65,16 @@ public class VendingMachineCLI {
 		Scanner input = new Scanner(System.in);
 		VendingMachineCLI cli = new VendingMachineCLI(input);
 		cli.run();
+
+//		VendingItems items = new VendingItems(input);
+//
+//
+//		Map<String, Product> productMap = items.getProducts();
+//		Product retrieved = productMap.get("D2");
+//		System.out.println(retrieved);
+
+//		System.out.println("We just retrieved a " + retrieved.getProductName() + " which cost $" + retrieved.getPrice());
+
+
 	}
 }

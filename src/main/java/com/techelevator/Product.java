@@ -1,21 +1,20 @@
 package com.techelevator;
 
-public class Products {
+public class Product {
 
     private String slotLocation;
     private String productName;
     private double price;
     private String itemType;
 
-    private Products[] product = new Products[]{};
 
-    public Products(String slotLocation, String productName, double price, String itemType) {
+    public Product(String slotLocation, String productName, double price, String itemType) {
         this.slotLocation = slotLocation;
         this.productName = productName;
         this.price = price;
         this.itemType = itemType;
     }
-    public Products(String productName, double price, String itemType) {
+    public Product(String productName, double price, String itemType) {
         this.productName = productName;
         this.price = price;
         this.itemType = itemType;
@@ -51,5 +50,15 @@ public class Products {
 
     public void setItemType(String itemType) {
         this.itemType = itemType;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "slotLocation='" + slotLocation + '\'' +
+                ", productName='" + productName + '\'' +
+                ", price=" + price +
+                ", itemType='" + itemType + '\'' +
+                '}';
     }
 }

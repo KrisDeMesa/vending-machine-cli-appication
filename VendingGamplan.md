@@ -1,10 +1,13 @@
 Class Product
     local, item, price, type
     Empty and load from file.csv
-    sold out exception
     from slot
+
+class inventory
     num of items, counter of items, count at end
     where do you store it
+    sold out exception
+
 
 
 class Payment + Feed Money 
@@ -25,5 +28,7 @@ class usersees interaction MAIN, interacts with other BUILD FIRST
      purchase
      exit 
         big loop menu choices. call other classes
+
+vending machine class
         
 
