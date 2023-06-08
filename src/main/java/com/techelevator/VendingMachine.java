@@ -21,21 +21,13 @@ public class VendingMachine {
     public VendingMachine(Scanner input) {
         this.input = input;
     }
-    public void displayItems() {
-        System.out.println("DISPLAYING ITEMS!!");
+    public void displayItems(VendingItems output) {
+
     }
     public double loadCredits(double deposit) {
         creditBalance += deposit;
         return creditBalance;
     }
-
-
-
-
-
-
-
-
 
 
 }

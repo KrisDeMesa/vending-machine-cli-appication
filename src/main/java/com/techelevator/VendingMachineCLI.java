@@ -36,14 +36,14 @@ public class VendingMachineCLI {
 					System.out.println("(2) Select Product");
 					System.out.println("(3) Finish Transaction");
 					String purchaseMenu = userInput.nextLine();
-					int purchaseInput = Integer.parseInt(choice);
+					int purchaseInput = Integer.parseInt(purchaseMenu);
 					if (purchaseInput == 1) {
 						vend.loadCredits(2.0);
 					} else if (purchaseInput == 2) {
 						// goes into sub menu product
 					} else if (purchaseInput == 3) {
 						// finish transaction
-						purchaseLoop = false;
+						break;
 					} else {
 						System.out.println("Invalid input!");
 					}
@@ -59,7 +59,6 @@ public class VendingMachineCLI {
 
 		}
 	}
-
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		VendingMachineCLI cli = new VendingMachineCLI(input);
