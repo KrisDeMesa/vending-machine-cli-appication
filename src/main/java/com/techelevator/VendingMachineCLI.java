@@ -4,6 +4,7 @@ import com.techelevator.util.ConsoleUtility;
 
 import javax.swing.*;
 import java.awt.color.ProfileDataException;
+import java.math.BigDecimal;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
@@ -13,6 +14,7 @@ public class VendingMachineCLI {
 	// Use this for keyboard input - it is initialized in the constructor
 	private Scanner userInput;
 
+	private VendingMachine vend = new VendingMachine(userInput);
 	public VendingMachineCLI(Scanner userInput) {
 		this.userInput = userInput;
 	}
@@ -29,31 +31,39 @@ public class VendingMachineCLI {
 		Map<String, Product> productMap = selectProduct.getProducts();
 		System.out.println("Choose an item.");
 		String choice = input.nextLine();
-		Product getInfo = selectProduct.getProducts().get(choice);
+		//Product getInfo = selectProduct.getProducts().get(choice);
 		try {
 			if (productMap.containsKey(choice.toUpperCase())) {
+				Product getInfo = productMap.get(choice.toUpperCase());
 				if (getInfo.getQuantity() > 0) {
-					if(getInfo.getPrice()
-					//System.out.println("***Dispense yumyum code");
-					if (getInfo.getItemType().equals("Gum")) {
-						System.out.println("Chew Chew, Yum!");
+					if(vend.purchase(getInfo)) {
+						vend.newBalance(getInfo.getPrice());
+						System.out.println("******************************");
+						System.out.println("Product:" + getInfo.getProductName()+ " Price: $" + getInfo.getPrice() + " Balance: $" + vend.getCreditBalance());
+						System.out.println("******************************");
 
+						//System.out.println("***Dispense yumyum code");
+						if (getInfo.getItemType().equals("Gum")) {
+							System.out.println("Chew Chew, Yum!");
 
-					} else if (getInfo.getItemType().equals("Chip")) {
-						System.out.println("Crunch Crunch, Yum!");
+						} else if (getInfo.getItemType().equals("Chip")) {
+							System.out.println("Crunch Crunch, Yum!");
 
-					} else if (getInfo.getItemType().equals("Candy")) {
-						System.out.println("Munch Munch, Yum!");
+						} else if (getInfo.getItemType().equals("Candy")) {
+							System.out.println("Munch Munch, Yum!");
 
-					} else {
-						System.out.println("Glug Glug, Yum!");
+						} else {
+							System.out.println("Glug Glug, Yum!");
+						}
+						} else {
+						System.out.println("Not enough money, insert more cash");
 					}
-
 				} else {
 					System.out.println("Item is sold out");
 				}
 
 			} else {
+				System.out.println("Product doesn't exit.");
 
 			}
 
@@ -75,7 +85,7 @@ public class VendingMachineCLI {
 				System.out.println("(3) Exit");
 				String choice = userInput.nextLine();
 				int input = Integer.parseInt(choice);
-				VendingMachine vend = new VendingMachine(userInput);
+				//VendingMachine vend = new VendingMachine(userInput);
 				// if input is 1
 				if (input == 1) {
 					// call vending machine method Display items when input is 1
@@ -92,7 +102,7 @@ public class VendingMachineCLI {
 						String purchaseMenu = userInput.nextLine();
 						int purchaseInput = Integer.parseInt(purchaseMenu);
 						if (purchaseInput == 1) {
-							vend.loadCredits(1);
+							vend.loadCredits(BigDecimal.valueOf(1.00));
 						} else if (purchaseInput == 2) {
 							boolean selectMenu = true;
 							displayItems();

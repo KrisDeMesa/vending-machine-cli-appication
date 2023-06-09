@@ -2,13 +2,14 @@ package com.techelevator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.math.BigDecimal;
 import java.util.Scanner;
 import java.util.TreeMap;
 
 public class VendingItems {
     private String slotLocation;
     private String productName;
-    private double price;
+    private BigDecimal price;
     private String itemType;
     private Scanner input;
     private int quantity = 5;
@@ -23,7 +24,7 @@ public class VendingItems {
         this.input = input;
         convertItems();
     }
-    public VendingItems(String slotLocation, String productName, double price, String itemType) {
+    public VendingItems(String slotLocation, String productName, BigDecimal price, String itemType) {
         this.slotLocation = slotLocation;
         this.productName = productName;
         this.price = price;
@@ -41,7 +42,7 @@ public class VendingItems {
         return productName;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -61,7 +62,7 @@ public class VendingItems {
                 this.itemSplit = itemSplit.split(split);
                 String slotLocation = this.itemSplit[0];
                 String productName = this.itemSplit[1];
-                double price = Double.parseDouble(this.itemSplit[2]);
+                BigDecimal price = BigDecimal.valueOf(Long.parseLong(this.itemSplit[2]));
                 String itemType = this.itemSplit[3];
                 Product newProducts = new Product(slotLocation, productName, price, itemType,quantity);
                 products.put(newProducts.getSlotLocation(), newProducts);

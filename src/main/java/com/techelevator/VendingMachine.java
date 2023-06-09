@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -8,22 +9,41 @@ import java.util.Scanner;
 public class VendingMachine {
     private String slotLocation;
     private String productName;
-    private double price;
+    private BigDecimal price;
     private String itemType;
-    private double creditBalance;
+    private BigDecimal creditBalance;
     private int quantity;
     private Scanner input;
 
 
 
-    public double getCreditBalance() {
+
+    public BigDecimal getCreditBalance() {
         return creditBalance;
     }
     public VendingMachine(Scanner input) {
         this.input = input;
 
     }
-    
+    // method here to
+    public boolean purchase (Product choice) {
+        boolean canBuy = false;
+        if (choice.getPrice().compareTo(creditBalance) == 1) {
+            canBuy = false;
+            return canBuy;
+
+        } else if (choice.getPrice().compareTo(creditBalance) == -1) {
+            canBuy = true;
+            return canBuy;
+
+        } else if (choice.getPrice().compareTo(creditBalance) == 0) {
+            canBuy = true;
+            return canBuy;
+        }
+        return canBuy;
+
+    }
+
 
                //NEEDD LOOOOOPPPP ABAOVE
         // VendingItems items = new VendingItems(input);
@@ -34,14 +54,18 @@ public class VendingMachine {
 //		System.out.println(retrieved);
 
 //		System.out.println("We just retrieved a " + retrieved.getProductName() + " which cost $" + retrieved.getPrice());
-    public double loadCredits(double deposit) {
-        creditBalance += deposit;
+    public BigDecimal loadCredits(BigDecimal deposit) {
+        creditBalance = creditBalance.add(deposit);
         return creditBalance;
     }
-    public double newBalance(double price){
-        creditBalance -= price;
+    public BigDecimal newBalance(BigDecimal price){
+        creditBalance = creditBalance.add(price);
         return creditBalance;
     }
 
 
 }
+
+
+
+
