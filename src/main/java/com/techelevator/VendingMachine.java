@@ -14,9 +14,6 @@ public class VendingMachine {
     private int quantity;
     private Scanner input;
 
-    private List<VendingItems> vendingItems = new ArrayList<>();
-
-
     public double getCreditBalance() {
         return creditBalance;
     }
@@ -24,11 +21,8 @@ public class VendingMachine {
         this.input = input;
 
     }
-    public Product displayItems() {
-        VendingItems displayItems = new VendingItems(input);
-         Map<String, Product> productPrint = displayItems.getProducts();
-         Product retrieved = productPrint.get("A1");
-         return retrieved;
+
+
                //NEEDD LOOOOOPPPP ABAOVE
         // VendingItems items = new VendingItems(input);
 //
@@ -38,8 +32,6 @@ public class VendingMachine {
 //		System.out.println(retrieved);
 
 //		System.out.println("We just retrieved a " + retrieved.getProductName() + " which cost $" + retrieved.getPrice());
-
-    }
     public double loadCredits(double deposit) {
         creditBalance += deposit;
         return creditBalance;
