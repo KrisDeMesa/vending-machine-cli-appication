@@ -9,24 +9,24 @@ import java.util.Scanner;
 public class VendingMachine {
     private String slotLocation;
     private String productName;
-    private BigDecimal price;
+    private BigDecimal price = BigDecimal.ZERO;
     private String itemType;
-    private BigDecimal creditBalance;
+    private BigDecimal creditBalance = BigDecimal.ZERO;
     private int quantity;
     private Scanner input;
-
-
 
 
     public BigDecimal getCreditBalance() {
         return creditBalance;
     }
+
     public VendingMachine(Scanner input) {
         this.input = input;
 
     }
+
     // method here to
-    public boolean purchase (Product choice) {
+    public boolean purchase(Product choice) {
         boolean canBuy = false;
         if (choice.getPrice().compareTo(creditBalance) == 1) {
             canBuy = false;
@@ -45,26 +45,27 @@ public class VendingMachine {
     }
 
 
-               //NEEDD LOOOOOPPPP ABAOVE
-        // VendingItems items = new VendingItems(input);
+    //NEEDD LOOOOOPPPP ABAOVE
+    // VendingItems items = new VendingItems(input);
 //
 //
 //		Map<String, Product> productMap = items.getProducts();
 //		Product retrieved = productMap.get("D2");
 //		System.out.println(retrieved);
 
-//		System.out.println("We just retrieved a " + retrieved.getProductName() + " which cost $" + retrieved.getPrice());
+    //		System.out.println("We just retrieved a " + retrieved.getProductName() + " which cost $" + retrieved.getPrice());
     public BigDecimal loadCredits(BigDecimal deposit) {
         creditBalance = creditBalance.add(deposit);
         return creditBalance;
     }
-    public BigDecimal newBalance(BigDecimal price){
-        creditBalance = creditBalance.add(price);
+
+    public BigDecimal newBalance(BigDecimal price) {
+        creditBalance = creditBalance.subtract(price);
         return creditBalance;
     }
-
-
 }
+
+
 
 
 

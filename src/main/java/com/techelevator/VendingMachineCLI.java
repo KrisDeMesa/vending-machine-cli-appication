@@ -19,6 +19,16 @@ public class VendingMachineCLI {
 		this.userInput = userInput;
 	}
 
+	public void returnChange() {
+		BigDecimal quarter = new BigDecimal(.25);
+		BigDecimal dimes = new BigDecimal(.10);
+		BigDecimal nickels = new BigDecimal(.5);
+		vend.getCreditBalance().divide(quarter);
+
+
+		System.out.println(vend.getCreditBalance().divide(quarter));
+	}
+
 	public void displayItems() {
 		VendingItems displayItems = new VendingItems(userInput);
 		Map<String, Product> productPrint = displayItems.getProducts();
@@ -41,7 +51,6 @@ public class VendingMachineCLI {
 						System.out.println("******************************");
 						System.out.println("Product:" + getInfo.getProductName()+ " Price: $" + getInfo.getPrice() + " Balance: $" + vend.getCreditBalance());
 						System.out.println("******************************");
-
 						//System.out.println("***Dispense yumyum code");
 						if (getInfo.getItemType().equals("Gum")) {
 							System.out.println("Chew Chew, Yum!");
@@ -85,6 +94,7 @@ public class VendingMachineCLI {
 				System.out.println("(3) Exit");
 				String choice = userInput.nextLine();
 				int input = Integer.parseInt(choice);
+
 				//VendingMachine vend = new VendingMachine(userInput);
 				// if input is 1
 				if (input == 1) {
@@ -102,13 +112,14 @@ public class VendingMachineCLI {
 						String purchaseMenu = userInput.nextLine();
 						int purchaseInput = Integer.parseInt(purchaseMenu);
 						if (purchaseInput == 1) {
-							vend.loadCredits(BigDecimal.valueOf(1.00));
+							vend.loadCredits(BigDecimal.valueOf(1.10));
 						} else if (purchaseInput == 2) {
 							boolean selectMenu = true;
 							displayItems();
 							chooseItem(userInput);
 							// goes into sub menu product
 						} else if (purchaseInput == 3) {
+							returnChange();
 							// finish transaction
 							thankYou();
 							break;
@@ -132,7 +143,7 @@ public class VendingMachineCLI {
 		}
 	}
 
-	public void thankYou(){
+	public void thankYou() {
 		System.out.println(ConsoleUtility.ANSI_BLUE );
 		System.out.println("************ Thank you ************");
 		System.out.println("                                   ");
@@ -140,7 +151,7 @@ public class VendingMachineCLI {
 		System.out.println("                                   ");
 	}
 
-	public void welcome(){
+	public void welcome() {
 		System.out.println(ConsoleUtility.ANSI_BLUE  );
 		System.out.println("                                   ");
 		System.out.println("************* Welcome *************");
@@ -151,13 +162,15 @@ public class VendingMachineCLI {
 		VendingMachineCLI cli = new VendingMachineCLI(input);
 		cli.run();
 
-//		VendingItems items = new VendingItems(input);
-////
-////
-//		Map<String, Product> productMap = items.getProducts();
-//		Product retrieved = productMap.containsKey()
-//		System.out.println(retrieved.);
 
-//		System.out.println("We just retrieved a " + retrieved.getProductName() + " which cost $" + retrieved.getPrice());
 	}
 }
+		/*
+		VendingItems items = new VendingItems(input);
+		Map<String, Product> productMap = items.getProducts();
+		Product retrieved = productMap.containsKey()
+		System.out.println(retrieved.);
+
+		System.out.println("We just retrieved a " + retrieved.getProductName() + " which cost $" + retrieved.getPrice());
+
+		 */

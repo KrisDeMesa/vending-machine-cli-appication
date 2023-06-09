@@ -6,7 +6,7 @@ public class Product {
 
     private String slotLocation;
     private String productName;
-    private BigDecimal price;
+    private BigDecimal price = BigDecimal.ZERO;
     private String itemType;
     private int quantity;
 

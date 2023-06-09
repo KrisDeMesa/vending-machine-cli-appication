@@ -62,7 +62,7 @@ public class VendingItems {
                 this.itemSplit = itemSplit.split(split);
                 String slotLocation = this.itemSplit[0];
                 String productName = this.itemSplit[1];
-                BigDecimal price = BigDecimal.valueOf(Long.parseLong(this.itemSplit[2]));
+                BigDecimal price = new BigDecimal(this.itemSplit[2]);
                 String itemType = this.itemSplit[3];
                 Product newProducts = new Product(slotLocation, productName, price, itemType,quantity);
                 products.put(newProducts.getSlotLocation(), newProducts);
