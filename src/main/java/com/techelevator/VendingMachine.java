@@ -14,6 +14,8 @@ public class VendingMachine {
     private int quantity;
     private Scanner input;
 
+
+
     public double getCreditBalance() {
         return creditBalance;
     }
@@ -21,7 +23,7 @@ public class VendingMachine {
         this.input = input;
 
     }
-
+    
 
                //NEEDD LOOOOOPPPP ABAOVE
         // VendingItems items = new VendingItems(input);
@@ -34,6 +36,10 @@ public class VendingMachine {
 //		System.out.println("We just retrieved a " + retrieved.getProductName() + " which cost $" + retrieved.getPrice());
     public double loadCredits(double deposit) {
         creditBalance += deposit;
+        return creditBalance;
+    }
+    public double newBalance(double price){
+        creditBalance -= price;
         return creditBalance;
     }
 

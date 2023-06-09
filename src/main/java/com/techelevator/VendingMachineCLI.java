@@ -2,6 +2,7 @@ package com.techelevator;
 
 import com.techelevator.util.ConsoleUtility;
 
+import javax.swing.*;
 import java.awt.color.ProfileDataException;
 import java.util.Locale;
 import java.util.Map;
@@ -31,15 +32,37 @@ public class VendingMachineCLI {
 		Product getInfo = selectProduct.getProducts().get(choice);
 		try {
 			if (productMap.containsKey(choice.toUpperCase())) {
-				System.out.println(getInfo.getProductName() + " " + getInfo.getItemType() + " " + getInfo.getPrice() + " selected.");
-			} else if (selectProduct.getQuantity() == 0) {
-				System.out.println("Item is sold out");
+				if (getInfo.getQuantity() > 0) {
+					if(getInfo.getPrice()
+					//System.out.println("***Dispense yumyum code");
+					if (getInfo.getItemType().equals("Gum")) {
+						System.out.println("Chew Chew, Yum!");
+
+
+					} else if (getInfo.getItemType().equals("Chip")) {
+						System.out.println("Crunch Crunch, Yum!");
+
+					} else if (getInfo.getItemType().equals("Candy")) {
+						System.out.println("Munch Munch, Yum!");
+
+					} else {
+						System.out.println("Glug Glug, Yum!");
+					}
+
+				} else {
+					System.out.println("Item is sold out");
+				}
+
+			} else {
+
 			}
+
 		} catch (NumberFormatException ex) {
 			System.out.println("Product doesn't exit.");
 		}
 		return null;
 	}
+
 	public void run() {
 		// Add a loop here for your menu
 		boolean loopCheck = true;
