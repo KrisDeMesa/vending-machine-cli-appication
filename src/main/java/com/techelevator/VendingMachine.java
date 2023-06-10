@@ -1,5 +1,7 @@
 package com.techelevator;
 
+import com.techelevator.util.ConsoleUtility;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +14,10 @@ public class VendingMachine {
     private BigDecimal price = BigDecimal.ZERO;
     private String itemType;
     private BigDecimal creditBalance = BigDecimal.ZERO;
-    private int quantity;
+    private BigDecimal dollar = BigDecimal.ONE;
+    private BigDecimal ten = BigDecimal.TEN;
+    private BigDecimal five = BigDecimal.valueOf(5);
+    private int quantity = 5;
     private Scanner input;
 
 
@@ -43,19 +48,20 @@ public class VendingMachine {
         return canBuy;
 
     }
-
-
-    //NEEDD LOOOOOPPPP ABAOVE
-    // VendingItems items = new VendingItems(input);
-//
-//
-//		Map<String, Product> productMap = items.getProducts();
-//		Product retrieved = productMap.get("D2");
-//		System.out.println(retrieved);
-
-    //		System.out.println("We just retrieved a " + retrieved.getProductName() + " which cost $" + retrieved.getPrice());
-    public BigDecimal loadCredits(BigDecimal deposit) {
-        creditBalance = creditBalance.add(deposit);
+    public BigDecimal loadCredits(Scanner input) {
+        String choice = input.nextLine();
+        int selection = Integer.parseInt(choice);
+        if (selection == 1) {
+            creditBalance = creditBalance.add(dollar);
+        } else if (selection == 5) {
+            creditBalance = creditBalance.add(five);
+        } else if (selection == 10) {
+            creditBalance = creditBalance.add(ten);
+        } else {
+            ConsoleUtility.printError("***************");
+            ConsoleUtility.printError("Invalid amount!");
+            ConsoleUtility.printError("***************");
+        }
         return creditBalance;
     }
 

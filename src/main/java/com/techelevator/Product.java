@@ -8,7 +8,7 @@ public class Product {
     private String productName;
     private BigDecimal price = BigDecimal.ZERO;
     private String itemType;
-    private int quantity;
+    private int quantity = 5;
 
     public Product(String slotLocation, String productName, BigDecimal price, String itemType, int quantity) {
         this.slotLocation = slotLocation;
@@ -37,6 +37,12 @@ public class Product {
     public int getQuantity() {
         return quantity;
     }
+
+    public int updateQuantity(int quantity) {
+        this.quantity -= quantity;
+        return quantity;
+    }
+
 
     @Override
     public String toString() {

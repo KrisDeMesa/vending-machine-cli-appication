@@ -15,10 +15,6 @@ public class VendingItems {
     private int quantity = 5;
     private String[] itemSplit = new String[4];
     private String split = "\\|";
-    private String chip = "Chip";
-    private String candy= "Candy";
-    private String drink = "Drink";
-    private String gum = "Gum";
     private TreeMap<String, Product> products = new TreeMap<>();
     public VendingItems(Scanner input) {
         this.input = input;
@@ -37,22 +33,19 @@ public class VendingItems {
     public String getSlotLocation() {
         return slotLocation;
     }
-
     public String getProductName() {
         return productName;
     }
-
     public BigDecimal getPrice() {
         return price;
     }
-
     public String getItemType() {
         return itemType;
     }
-
     public int getQuantity() {
         return quantity;
     }
+
 
     public void convertItems() {
         File items = new File("vendingmachine.csv");
@@ -64,7 +57,7 @@ public class VendingItems {
                 String productName = this.itemSplit[1];
                 BigDecimal price = new BigDecimal(this.itemSplit[2]);
                 String itemType = this.itemSplit[3];
-                Product newProducts = new Product(slotLocation, productName, price, itemType,quantity);
+                Product newProducts = new Product(slotLocation, productName, price, itemType, quantity);
                 products.put(newProducts.getSlotLocation(), newProducts);
             }
         } catch (FileNotFoundException e) {
