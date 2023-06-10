@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.text.Bidi;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
@@ -28,26 +29,20 @@ public class VendingMachineCLI {
 	}
 
 	public void returnChange() {
+		BigDecimal[] quartersWithDimeRemainder;
+		BigDecimal[] dimesWithNickelRemainder;
 		BigDecimal quarter = BigDecimal.valueOf(.25);
-		BigDecimal dime = BigDecimal.valueOf(.10);
+		BigDecimal dime = BigDecimal.valueOf(.1);
 		BigDecimal nickel = BigDecimal.valueOf(.05);
 		BigDecimal change = vend.getCreditBalance();
-		change.divide(quarter);
-
-
-
-
-
-		/* quarter = .25
-			dimes = .10
-			nickel = .5
-			balance / .25 = whole num quarters
-			remainder  gets divided / .10 check how many for times. remainder
-			remainder / .5 count how many = dimes.
-
-
-
-		 */
+		quartersWithDimeRemainder = change.divideAndRemainder(quarter);
+		dimesWithNickelRemainder = quartersWithDimeRemainder[1].divideAndRemainder(dime);
+		BigDecimal nickelChange = dimesWithNickelRemainder[1].divide(nickel);
+		System.out.println(ConsoleUtility.ANSI_BLUE);
+		System.out.println("*******************************************");
+		System.out.println("                You received               ");
+		System.out.println("*******************************************");
+		System.out.println("** Quarters: " + quartersWithDimeRemainder[0] + " | Dimes: " + dimesWithNickelRemainder[0].setScale(0) + " | Nickels : " + nickelChange + " **");
 	}
 
 
@@ -82,16 +77,34 @@ public class VendingMachineCLI {
 						getInfo.updateQuantity(1);
 						System.out.println("*Product: " + getInfo.getProductName() + " | Price: $" + getInfo.getPrice() + " | Balance: $" + vend.getCreditBalance() + "*");
 						if (getInfo.getItemType().equals("Gum")) {
+							System.out.println("			   ");
+							System.out.println("***************");
 							System.out.println("Chew Chew, Yum!");
+							System.out.println("***************");
+							System.out.println("			   ");
 
 						} else if (getInfo.getItemType().equals("Chip")) {
+							System.out.println("			       ");
+							System.out.println("*******************");
 							System.out.println("Crunch Crunch, Yum!");
+							System.out.println("*******************");
+							System.out.println("			       ");
+
 
 						} else if (getInfo.getItemType().equals("Candy")) {
+							System.out.println("			     ");
+							System.out.println("*****************");
 							System.out.println("Munch Munch, Yum!");
+							System.out.println("*****************");
+
 
 						} else {
+							System.out.println("			   ");
+							System.out.println("***************");
 							System.out.println("Glug Glug, Yum!");
+							System.out.println("***************");
+
+
 						}
 					} else {
 						System.out.println("Not enough money, insert more cash");
@@ -140,7 +153,9 @@ public class VendingMachineCLI {
 					loopCheck = false;
 					boolean purchaseLoop = true;
 					while (purchaseLoop) {
+						System.out.println("********************************");
 						System.out.println("Current Money Provided: $" + vend.getCreditBalance());
+						System.out.println("********************************");
 						System.out.println("(1) Feed Money");
 						System.out.println("(2) Select Product");
 						System.out.println("(3) Finish Transaction");
@@ -156,6 +171,7 @@ public class VendingMachineCLI {
 							// goes into sub menu product
 						} else if (purchaseInput == 3) {
 							// finish transaction
+							returnChange();
 							thankYou();
 							break;
 						} else {
@@ -181,18 +197,18 @@ public class VendingMachineCLI {
 	// Thank you banner
 	public void thankYou() {
 		System.out.println(ConsoleUtility.ANSI_BLUE);
-		System.out.println("You received $:" + vend.getCreditBalance());
-		System.out.println("************ Thank you ************");
-		System.out.println("                                   ");
-		System.out.println("                                   ");
-		System.out.println("                                   ");
+		System.out.println("**************** THANK YOU ****************");
+		System.out.println("                                           ");
+		System.out.println("                                           ");
+		System.out.println("                                  		   ");
 	}
 	// Welcome banner
 	public void welcome() {
 		System.out.println(ConsoleUtility.ANSI_BLUE);
-		System.out.println("                                   ");
-		System.out.println("************* Welcome *************");
-		System.out.println("                                   ");
+		System.out.println("                                   		   ");
+		System.out.println("***************** WELCOME *****************");
+		System.out.println("                                  		   ");
+
 	}
 	// Warning graphics
 	public static void warning() {
@@ -200,6 +216,7 @@ public class VendingMachineCLI {
 		ConsoleUtility.printError("Invalid input!!");
 		ConsoleUtility.printError("***************");
 	}
+
 
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
