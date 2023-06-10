@@ -42,7 +42,10 @@ public class VendingMachineCLI {
 		System.out.println("*******************************************");
 		System.out.println("                You received               ");
 		System.out.println("*******************************************");
-		System.out.println("** Quarters: " + quartersWithDimeRemainder[0] + " | Dimes: " + dimesWithNickelRemainder[0].setScale(0) + " | Nickels : " + nickelChange + " **");
+		System.out.println("** Quarters: " + quartersWithDimeRemainder[0].toPlainString() + " | Dimes: " + dimesWithNickelRemainder[0].setScale(0).toPlainString() + " | Nickels : " + nickelChange.toPlainString() + " **");
+		vend.setCreditBalance();
+		System.out.println("Credit balance: $" + vend.getCreditBalance());
+
 	}
 
 
@@ -59,6 +62,7 @@ public class VendingMachineCLI {
 		public void displayItems() {
 		Map<String, Product> productPrint = selectProduct.getProducts();
 		for (Map.Entry<String, Product> element : productPrint.entrySet()) {
+			System.out.println(ConsoleUtility.ANSI_BLUE);
 			System.out.println(element);
 		}
 	}
@@ -75,7 +79,16 @@ public class VendingMachineCLI {
 					if (vend.purchase(getInfo)) {
 						vend.newBalance(getInfo.getPrice());
 						getInfo.updateQuantity(1);
-						System.out.println("*Product: " + getInfo.getProductName() + " | Price: $" + getInfo.getPrice() + " | Balance: $" + vend.getCreditBalance() + "*");
+						System.out.println("*****                                 *****");
+						System.out.println("***** Vending machine dispensing..... *****");
+						System.out.println("*****                                 *****");
+						try {
+							Thread.sleep(2000);
+						} catch (InterruptedException exception) {
+							System.out.println("Vending error!");
+						}
+						System.out.println("");
+						System.out.println("*Product: " + getInfo.getProductName() + " | Price: $" + getInfo.getPrice() + " | Balance: $" + vend.getCreditBalance() + " | Quantity: x 1*");
 						if (getInfo.getItemType().equals("Gum")) {
 							System.out.println("			   ");
 							System.out.println("***************");
@@ -153,9 +166,11 @@ public class VendingMachineCLI {
 					loopCheck = false;
 					boolean purchaseLoop = true;
 					while (purchaseLoop) {
+						System.out.println(ConsoleUtility.ANSI_BLUE);
 						System.out.println("********************************");
 						System.out.println("Current Money Provided: $" + vend.getCreditBalance());
 						System.out.println("********************************");
+						System.out.println(ConsoleUtility.ANSI_CYAN);
 						System.out.println("(1) Feed Money");
 						System.out.println("(2) Select Product");
 						System.out.println("(3) Finish Transaction");
@@ -176,20 +191,28 @@ public class VendingMachineCLI {
 							break;
 						} else {
 							warning();
-							run();
 						}
 					}
 					run();
 				} else if (input == 3) {
+					System.out.println("*********** Exiting... ***********");
 					// menu cli exits
-					System.out.println("Exit");
+					try {
+						Thread.sleep(2000);
+
+					} catch (InterruptedException exception) {
+						System.out.println("Vending error!");
+					}
+					returnChange();
 					loopCheck = false;
 				} else {
 					// Invalid input
 					warning();
+					run();
 
 				}
 			} catch (NumberFormatException ex) {
+				loopCheck = true;
 				warning();
 			}
 		}

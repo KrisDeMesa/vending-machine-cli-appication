@@ -27,7 +27,10 @@ public class VendingMachine {
 
     public VendingMachine(Scanner input) {
         this.input = input;
+    }
 
+    public void setCreditBalance() {
+        this.creditBalance = BigDecimal.ZERO;
     }
 
     // method here to

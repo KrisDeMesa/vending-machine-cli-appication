@@ -64,4 +64,5 @@ public class VendingItems {
             System.out.println("Inventory error!");
         }
     }
+
 }
