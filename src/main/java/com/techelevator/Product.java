@@ -17,6 +17,9 @@ public class Product {
         this.itemType = itemType;
         this.quantity = quantity;
     }
+    public Product() {
+
+    }
 
 
     public String getSlotLocation() {

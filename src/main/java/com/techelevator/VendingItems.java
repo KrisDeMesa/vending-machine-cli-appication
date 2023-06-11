@@ -16,6 +16,7 @@ public class VendingItems {
     private String[] itemSplit = new String[4];
     private String split = "\\|";
     private TreeMap<String, Product> products = new TreeMap<>();
+
     public VendingItems(Scanner input) {
         this.input = input;
         convertItems();
