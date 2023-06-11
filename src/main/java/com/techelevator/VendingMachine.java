@@ -65,12 +65,15 @@ public class VendingMachine {
         try (PrintWriter salesLog = new PrintWriter(new FileOutputStream(writeLog, true))) {
             if (selection == 1) {
                 creditBalance = creditBalance.add(dollar);
+                salesLog.println(dateTime.getDateTimeOfTransaction() + " FEED MONEY: " + "$1.00 " + "$" + getCreditBalance().setScale(2));
 
             } else if (selection == 5) {
                 creditBalance = creditBalance.add(five);
+                salesLog.println(dateTime.getDateTimeOfTransaction() + " FEED MONEY: " + "$5.00 " + "$" + getCreditBalance().setScale(2));
 
             } else if (selection == 10) {
                 creditBalance = creditBalance.add(ten);
+                salesLog.println(dateTime.getDateTimeOfTransaction() + " FEED MONEY: " + "$10.00 " + "$" + getCreditBalance().setScale(2));
 
             } else {
                 ConsoleUtility.printError("***************");

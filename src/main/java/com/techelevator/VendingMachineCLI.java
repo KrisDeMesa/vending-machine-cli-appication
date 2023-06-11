@@ -47,7 +47,14 @@ public class VendingMachineCLI {
 		System.out.println("                You received               ");
 		System.out.println("*******************************************");
 		System.out.println("** Quarters: " + quartersWithDimeRemainder[0].toPlainString() + " | Dimes: " + dimesWithNickelRemainder[0].setScale(0).toPlainString() + " | Nickels : " + nickelChange.toPlainString() + " **");
+		try (PrintWriter salesLog = new PrintWriter(new FileOutputStream(writeLog, true))) {
+			salesLog.println(dateTime.getDateTimeOfTransaction() + " GIVE CHANGE: " + vend.getCreditBalance() + " $0.00");
+
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found.");
+		}
 		vend.setCreditBalance();
+
 		System.out.println("Credit balance: $" + vend.getCreditBalance());
 
 	}
@@ -56,7 +63,8 @@ public class VendingMachineCLI {
 		Product salesInfo = sales;
 		try (PrintWriter salesLog = new PrintWriter(new FileOutputStream(writeLog, true))) {
 			salesLog.println(
-					 salesInfo.getProductName() + " "
+					dateTime.getDateTimeOfTransaction() + " "
+					+ salesInfo.getProductName() + " "
 					+ salesInfo.getSlotLocation() +  " $"
 					+ salesInfo.getPrice() + " $"
 					+ vend.getCreditBalance());
